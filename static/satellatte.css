@@ -8,9 +8,17 @@ body {
     margin: 0px;
 }
 
+#ribbon {
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: 0;
+	z-index: 20;
+}
+
 #satellatte-message {
 	position: absolute;
-    top: 10px;
+    bottom: 10px;
     right: 10px;
     background-color: rgba(0, 0, 0, 0.75);
     padding: 10px;
