@@ -18,7 +18,7 @@ body {
 
 #satellatte-message {
 	position: absolute;
-    bottom: 10px;
+    bottom: 25px;
     right: 10px;
     background-color: rgba(0, 0, 0, 0.75);
     padding: 10px;
