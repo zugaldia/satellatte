@@ -1,9 +1,8 @@
 import webapp2
 import jinja2
-import os
 from google.appengine.ext import db
 
-jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
+jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 
 class Visitor(db.Model):
     country = db.StringProperty(default=None)
@@ -12,14 +11,26 @@ class Visitor(db.Model):
     coordinates = db.StringProperty(default=None)
     datetime = db.DateTimeProperty(auto_now_add=True)
 
+class GeoJS(webapp2.RequestHandler):
+    def get(self):
+        visits = []
+        results = db.GqlQuery("SELECT * FROM Visitor WHERE coordinates > :1", None)
+        for result in results:
+            latitude, longitude = result.coordinates.split(',')
+            visits.append({ 'latitude': latitude, 'longitude': longitude,
+                            'text': '%s, %s (%s) on %s' % (result.city, result.region, result.country, result.datetime)})
+        template_values = { 'visits': visits }
+        template = jinja_environment.get_template('visitors.js')
+        self.response.out.write(template.render(template_values))
+
 class MainPage(webapp2.RequestHandler):
     def get(self):
         # recent visits
         recent = []
-        visits = db.GqlQuery("SELECT * FROM Visitor ORDER BY datetime DESC LIMIT 15")
-        for visit in visits:
-            if visit.coordinates:
-                recent.append('%s, %s (%s)' % (visit.city, visit.region, visit.country))
+        results = db.GqlQuery("SELECT * FROM Visitor ORDER BY datetime DESC LIMIT 15")
+        for result in results:
+            if result.coordinates:
+                recent.append('%s, %s (%s)' % (result.city, result.region, result.country))
         
         # store new visit
         visitor = Visitor()
@@ -52,4 +63,4 @@ class MainPage(webapp2.RequestHandler):
         template = jinja_environment.get_template('index.html')
         self.response.out.write(template.render(template_values))
 
-app = webapp2.WSGIApplication([('/', MainPage)], debug=True)
+app = webapp2.WSGIApplication([('/', MainPage), ('/visitors.js', GeoJS)], debug=True)

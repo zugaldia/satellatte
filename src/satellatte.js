@@ -46,5 +46,17 @@ function Satellatte(message_element) {
 		}
 	}
 	
+	satellatte.load_visitors = function() {
+		var geojsonLayer = new L.GeoJSON();
+		geojsonLayer.on('featureparse', function (e) {
+		    if (e.properties && e.properties.name) {
+		        e.layer.bindPopup(e.properties.name);
+		    }
+		});
+
+		geojsonLayer.addGeoJSON(data);
+		map.addLayer(geojsonLayer);
+	}
+	
 	return satellatte;
 }
