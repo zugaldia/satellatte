@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="YAYAHA (Yet Another You Are Here App)">
+    <meta name="author" content="Antonio Zugaldia">
+    <title>Satellatte</title>
+    
+    <link rel="stylesheet" href="/static/leaflet/dist/leaflet.css" />
+    <!--[if lte IE 8]><link rel="stylesheet" href="/static/leaflet/dist/leaflet.ie.css" /><![endif]-->
+    <link href="/static/satellatte.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <script src="/static/leaflet/dist/leaflet.js" type="text/javascript"></script>
+    <script src="/static/wax/dist/wax.leaf.min.js" type="text/javascript"></script>
+    <script src="/static/satellatte.min.js" type="text/javascript"></script>
+  </head>
+
+<body>
+
+<div id="satellatte-message">Welcome.</div>
+<div id="satellatte-map"></div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var s = Satellatte('satellatte-message');
+        s.map_setup('satellatte-map');
+        s.marker({{ latitude }}, {{ longitude }}, '{{ text|escape }}', '{{ recent|escape }}');
+    });
+</script>
+
+</body>
+</html>
