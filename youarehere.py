@@ -16,9 +16,10 @@ class MainPage(webapp2.RequestHandler):
     def get(self):
         # recent visits
         recent = []
-        visits = db.GqlQuery("SELECT * FROM Visitor WHERE coordinates > :1 LIMIT 10", None)
+        visits = db.GqlQuery("SELECT * FROM Visitor ORDER BY datetime DESC LIMIT 15")
         for visit in visits:
-            recent.append('%s, %s (%s)' % (visit.city, visit.region, visit.country))
+            if visit.coordinates:
+                recent.append('%s, %s (%s)' % (visit.city, visit.region, visit.country))
         
         # store new visit
         visitor = Visitor()
