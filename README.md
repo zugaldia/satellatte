@@ -7,11 +7,11 @@ NOTES
 
 * If you want to know more about these geolocation headers you can check the [official documentation](https://developers.google.com/appengine/docs/python/runtime#Request_Headers).
 
-* Your location is stored with the sole purpose of showing a "recent visits" box. You can get the data from [this URL](http://satellatte.appspot.com/visitors.js).
-
 * The interactive map is handled by [MapBox's Wax](http://mapbox.com/wax) and [CloudMade's Leaflet](http://leaflet.cloudmade.com).
 
-* The tiles are the beautiful [MapBox Streets](http://mapbox.com/maps).
+* The tiles are based on the beautiful [MapBox Streets](http://mapbox.com/maps) and are hosted by MapBox.
+
+* Your location is stored with the sole purpose of showing a "recent visits" box. You can get the data from [this URL](http://satellatte.appspot.com/visitors.js).
 
 * If you make changes to satellatte.js you need to re-minimize it with [Closure](https://developers.google.com/closure) or change the link in the HTML head.
 
