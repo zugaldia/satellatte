@@ -4,7 +4,7 @@
 
 function Satellatte(message_element) {
 	var satellatte = {},
-		url = 'http://api.tiles.mapbox.com/v3/mapbox.mapbox-streets.jsonp',
+		url = 'http://a.tiles.mapbox.com/v3/zugaldia.map-qshm3c0v.jsonp',
 		message_id = "#" + message_element,
 		zoom_out = 3,
 		zoom_in = 11,
