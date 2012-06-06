@@ -16,7 +16,7 @@ body {
 	z-index: 20;
 }
 
-#satellatte-message {
+#satellatte-box {
 	position: absolute;
     bottom: 25px;
     right: 10px;

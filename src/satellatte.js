@@ -8,7 +8,7 @@ function Satellatte(message_element) {
 		message_id = "#" + message_element,
 		zoom_out = 3,
 		zoom_in = 11,
-		map;
+		map, geojsonLayer;
 	
 	satellatte.set_message = function(text) {
 		$(message_id).text(text);
@@ -47,15 +47,23 @@ function Satellatte(message_element) {
 	}
 	
 	satellatte.load_visitors = function() {
-		var geojsonLayer = new L.GeoJSON();
-		geojsonLayer.on('featureparse', function (e) {
-		    if (e.properties && e.properties.name) {
-		        e.layer.bindPopup(e.properties.name);
-		    }
-		});
-
-		geojsonLayer.addGeoJSON(data);
+		// We don't need to reload if we already did
+		if (!geojsonLayer) {
+			geojsonLayer = new L.GeoJSON();
+			geojsonLayer.on('featureparse', function (e) {
+			    if (e.properties && e.properties.name) {
+			        e.layer.bindPopup(e.properties.name);
+			    }
+			});
+	
+			geojsonLayer.addGeoJSON(data);
+		}
+		
 		map.addLayer(geojsonLayer);
+	}
+	
+	satellatte.unload_visitors = function() {
+		map.removeLayer(geojsonLayer);
 	}
 	
 	return satellatte;
