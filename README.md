@@ -1,4 +1,4 @@
-Satellatte is a simple app to test Google AppEngine's geolocation headers. It automatically detects your location (city, region, country, lat/lon pair) and shows it in a marker in a full-screen map.
+Satellatte is a simple app to test Google AppEngine's [geolocation headers](https://developers.google.com/appengine/docs/python/runtime#Request_Headers). It automatically detects your location (city, region, country, lat/lon pair) and shows it in a marker in a full-screen map.
 
 You can see it in action here: http://satellatte.appspot.com
 
